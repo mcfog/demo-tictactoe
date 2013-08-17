@@ -1,0 +1,30 @@
+doctype 5
+html
+  head
+    title Mimosa
+    link(rel='stylesheet', href='/stylesheets/style.css' + cachebust)
+
+    script
+      window.require = {
+        urlArgs: "b=" + ((new Date()).getTime()),
+        paths: {
+          jquery: 'vendor/jquery',
+          'socket.io': '/socket.io/socket.io.js'
+        },
+        shim: {
+          'socket.io': {
+            exports: 'io'
+          }
+        }
+      }
+
+    if optimize
+      script(src='/javascripts/main-built.js')
+    else
+      script(src='/javascripts/vendor/require.js', data-main='/javascripts/main.js')
+
+
+    if reload
+      script(src='/javascripts/reload-client.js')
+  body
+    block content
